@@ -1,0 +1,13 @@
+# data is downloaded by run_pipeline.py and not redistributed
+data/raw/
+data/processed/
+models/*.joblib
+*.part
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
