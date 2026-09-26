@@ -41,8 +41,23 @@ baseline is reported alongside, so accuracy can be read in context.
 ## Results
 
 <!-- RESULTS:START -->
-Run `python run_pipeline.py` to fill this section. It is rewritten on every run with the test-set
-scores of all six model and feature pairs, the majority-class baseline and the credibility summary.
+_Latest run: 26 September 2026. 10,000 reviews after cleaning (8,000 train / 2,000 test, stratified). Class mix: positive 84%, neutral 11%, negative 5%._
+
+| Model | Features | Accuracy | Macro precision | Macro recall | Macro F1 | Best parameters |
+|---|---|---|---|---|---|---|
+| **SVM** | TF-IDF | 0.832 | 0.613 | 0.575 | **0.585** | C=1, degree=2, gamma=scale, kernel=linear |
+| SVM | BoW | 0.765 | 0.489 | 0.583 | 0.515 | C=100, degree=2, gamma=auto, kernel=rbf |
+| Naive Bayes | TF-IDF | 0.761 | 0.510 | 0.542 | 0.510 | alpha=0.1 |
+| Random Forest | BoW | 0.854 | 0.690 | 0.466 | 0.495 | max_depth=60, min_samples_leaf=2, n_estimators=400 |
+| Naive Bayes | BoW | 0.704 | 0.476 | 0.564 | 0.490 | alpha=1.0 |
+| Random Forest | TF-IDF | 0.856 | 0.716 | 0.443 | 0.480 | max_depth=60, min_samples_leaf=2, n_estimators=400 |
+| Majority class | - | 0.843 | 0.281 | 0.333 | 0.305 | - |
+
+- **Best model:** SVM + TF-IDF, macro F1 0.585 and accuracy 0.832, against 0.843 accuracy (macro F1 0.305) for always predicting the majority class.
+- **Features:** average macro F1 across the three models is 0.525 with TF-IDF and 0.500 with Bag-of-Words.
+- **Credibility:** 12.3% of reviews are flagged inconsistent (817 rating contradicts text, 216 too short, 197 generic repeated text).
+
+Full per-class reports, confusion matrices and tuned parameters: [`reports/metrics.json`](reports/metrics.json) and [`reports/results.md`](reports/results.md).
 <!-- RESULTS:END -->
 
 <p>
