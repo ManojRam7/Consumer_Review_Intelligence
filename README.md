@@ -60,6 +60,18 @@ _Latest run: 26 September 2026. 10,000 reviews after cleaning (8,000 train / 2,0
 Full per-class reports, confusion matrices and tuned parameters: [`reports/metrics.json`](reports/metrics.json) and [`reports/results.md`](reports/results.md).
 <!-- RESULTS:END -->
 
+**Reading the results.** Only 5% of reviews are negative and 11% neutral, so always predicting
+"positive" already scores 84% accuracy while missing every unhappy customer. SVM with TF-IDF lifts
+F1 on negative reviews from 0 to 0.46 and on neutral reviews from 0 to 0.38 while keeping positive
+F1 at 0.92, which is why it wins on macro F1 even though its accuracy (0.832) sits just below the
+baseline. The random forests post the highest accuracy (0.856) but find only 12-13% of neutral
+reviews. TF-IDF beat Bag-of-Words on average across the three models, as in the dissertation.
+
+On credibility, 1,230 of the 10,000 reviews (12.3%) are flagged. Some rating-text contradictions
+are genuine (a five-star rating on a critical review), while others are VADER misreading long,
+mixed or sarcastic reviews, so the rule works as a screening step before manual review rather than
+a verdict.
+
 <p>
   <img src="reports/figures/model_comparison.png" width="100%" alt="Model comparison">
 </p>
